@@ -12,23 +12,22 @@ export class SupabaseStrategy extends PassportStrategy(Strategy, 'supabase') {
   private supabase: SupabaseClient;
 
   constructor(configService: ConfigService) {
-    const jwtSecret = configService.get<string>('SUPABASE_JWT_SECRET');
+    // Usa il namespace dalla configurazione tipizzata
+    const authConfig = configService.get('auth');
+    const supabase = authConfig?.supabase;
 
-    if (!jwtSecret) {
+    if (!supabase?.jwtSecret) {
       throw new Error('SUPABASE_JWT_SECRET is required');
     }
 
     super({
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
       ignoreExpiration: false,
-      secretOrKey: jwtSecret,
+      secretOrKey: supabase.jwtSecret,
       passReqToCallback: true, // Per avere accesso al token originale
     });
 
-    this.supabase = createClient(
-      configService.get<string>('SUPABASE_URL') || '',
-      configService.get<string>('SUPABASE_ANON_KEY') || '',
-    );
+    this.supabase = createClient(supabase.url || '', supabase.anonKey || '');
   }
 
   async validate(request: FastifyRequest): Promise<AuthUserDto> {

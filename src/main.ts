@@ -12,12 +12,17 @@ import {
 } from '@nestjs/common';
 import { HttpExceptionFilter } from './libs/exceptions/exception.filter';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+import { ConfigService } from '@nestjs/config';
 
 async function bootstrap() {
   const app = await NestFactory.create<NestFastifyApplication>(
     AppModule,
     new FastifyAdapter(),
   );
+
+  // Ottieni ConfigService
+  const configService = app.get(ConfigService);
+
   app.enableVersioning({
     type: VersioningType.URI,
     defaultVersion: '1',
@@ -47,7 +52,7 @@ async function bootstrap() {
   // ═══════════════════════════════════════════════════
   // Swagger Configuration (solo in development e test)
   // ═══════════════════════════════════════════════════
-  const nodeEnv = process.env.NODE_ENV || 'development';
+  const nodeEnv = configService.get<string>('app.nodeEnv') || 'development';
   const isDevelopmentOrTest = nodeEnv === 'development' || nodeEnv === 'test';
 
   if (isDevelopmentOrTest) {
@@ -78,8 +83,8 @@ async function bootstrap() {
     });
   }
 
-  const port = process.env.PORT || 3000;
-  await app.listen(port, '0.0.0.0');
+  const port = configService.get<number>('app.port');
+  await app.listen(port!, '0.0.0.0');
 }
 
 bootstrap();

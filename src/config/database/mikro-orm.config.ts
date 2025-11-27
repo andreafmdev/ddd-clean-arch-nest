@@ -1,18 +1,20 @@
-import 'dotenv/config';
 import { defineConfig } from '@mikro-orm/postgresql';
 import { Migrator } from '@mikro-orm/migrations';
+import { ConfigService } from '@nestjs/config';
 
-export default defineConfig({
-  entities: ['dist/**/*.entity.js'],
-  entitiesTs: ['src/**/*.entity.ts'],
-  dbName: process.env.DATABASE_NAME,
-  host: process.env.DATABASE_HOST,
-  port: Number(process.env.DATABASE_PORT),
-  user: process.env.DATABASE_USER,
-  password: process.env.DATABASE_PASSWORD,
-  extensions: [Migrator],
-  migrations: {
-    tableName: 'migrations',
-    path: 'src/config/database/migrations',
-  },
-});
+// Funzione factory per ottenere la configurazione
+export default (configService: ConfigService) =>
+  defineConfig({
+    entities: ['dist/**/*.entity.js'],
+    entitiesTs: ['src/**/*.entity.ts'],
+    dbName: configService.get<string>('database.name'),
+    host: configService.get<string>('database.host'),
+    port: configService.get<number>('database.port'),
+    user: configService.get<string>('database.user'),
+    password: configService.get<string>('database.password'),
+    extensions: [Migrator],
+    migrations: {
+      tableName: 'migrations',
+      path: 'src/config/database/migrations',
+    },
+  });

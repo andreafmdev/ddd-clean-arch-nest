@@ -12,21 +12,19 @@ export class KeycloakConfigService implements KeycloakConnectOptionsFactory {
   constructor(private readonly configService: ConfigService) {}
 
   createKeycloakConnectOptions(): KeycloakConnectOptions {
-    const authServerUrl = this.configService.get<string>(
-      'KEYCLOAK_AUTH_SERVER_URL',
-    );
-    const realm = this.configService.get<string>('KEYCLOAK_REALM');
-    const clientId = this.configService.get<string>('KEYCLOAK_CLIENT_ID');
+    // Usa i namespace dalla configurazione tipizzata
+    const authConfig = this.configService.get('auth');
+    const keycloak = authConfig?.keycloak;
 
-    if (!authServerUrl || !realm || !clientId) {
+    if (!keycloak?.authServerUrl || !keycloak?.realm || !keycloak?.clientId) {
       throw new Error('Missing required Keycloak configuration');
     }
 
     return {
-      authServerUrl,
-      realm,
-      clientId,
-      secret: this.configService.get<string>('KEYCLOAK_CLIENT_SECRET') || '',
+      authServerUrl: keycloak.authServerUrl,
+      realm: keycloak.realm,
+      clientId: keycloak.clientId,
+      secret: keycloak.clientSecret || '',
       policyEnforcement: PolicyEnforcementMode.PERMISSIVE,
       tokenValidation: TokenValidation.ONLINE,
     };

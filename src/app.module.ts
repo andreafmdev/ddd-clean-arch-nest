@@ -14,6 +14,12 @@ import { CommunicationModule } from './modules/communication/communication.modul
 import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { AuthModule } from './modules/auth/auth.module';
+import { validationSchema } from './config/env/validation.schema';
+import appConfig, {
+  databaseConfig,
+  authConfig,
+} from './config/env/configuration';
+
 @Module({
   imports: [
     HttpModule,
@@ -28,13 +34,22 @@ import { AuthModule } from './modules/auth/auth.module';
         `.env.${process.env.ENVIRONMENT || process.env.NODE_ENV || 'local'}`,
         '.env', // fallback
       ],
+      // Valida le variabili d'ambiente all'avvio
+      validationSchema,
+      // Carica le configurazioni tipizzate
+      load: [appConfig, databaseConfig, authConfig],
+      // Valida che tutte le variabili richieste siano presenti
+      validationOptions: {
+        allowUnknown: true, // Permetti variabili non definite nello schema
+        abortEarly: true, // Ferma alla prima validazione fallita
+      },
     }),
     MikroOrmModule.forRootAsync({
       imports: [ConfigModule],
       inject: [ConfigService],
-      useFactory: () => {
+      useFactory: (configService: ConfigService) => {
         return {
-          ...mikroOrmConfig,
+          ...mikroOrmConfig(configService),
           allowGlobalContext: true,
         };
       },
