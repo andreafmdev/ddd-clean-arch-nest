@@ -100,7 +100,7 @@ importers:
         version: 17.2.3
       effect:
         specifier: ^3.12.4
-        version: 3.19.3
+        version: 3.19.8
       fastify:
         specifier: ^5.6.2
         version: 5.6.2
@@ -2650,8 +2650,8 @@ packages:
   ee-first@1.1.1:
     resolution: {integrity: sha512-WMwm9LhRUo+WUaRN+vRuETqG89IgZphVSNkdFgeb6sS/E4OrDIN7t48CAewSHXc6C8lefD8KKfr5vY61brQlow==}
 
-  effect@3.19.3:
-    resolution: {integrity: sha512-LodiPXiyUJWQ5LoMhUGbu0acD2ff5A5teJtUlLKDPVfoeWEBcZLlzK8BeVXpVa0f30UsdHouVCf0C/E0TxYMrA==}
+  effect@3.19.8:
+    resolution: {integrity: sha512-OmLw8EfH02vdmyU2fO4uY9He/wepwKI5E/JNpE2pseaWWUbaYOK9UlxIiKP20ZEqQr+S/jSqRDGmpiqD/2DeCQ==}
 
   electron-to-chromium@1.5.262:
     resolution: {integrity: sha512-NlAsMteRHek05jRUxUR0a5jpjYq9ykk6+kO0yRaMi5moe7u0fVIOeQ3Y30A8dIiWFBNUoQGi1ljb1i5VtS9WQQ==}
@@ -8498,7 +8498,7 @@ snapshots:
 
   ee-first@1.1.1: {}
 
-  effect@3.19.3:
+  effect@3.19.8:
     dependencies:
       '@standard-schema/spec': 1.0.0
       fast-check: 3.23.2
