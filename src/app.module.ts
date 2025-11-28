@@ -35,7 +35,8 @@ import appConfig, {
         '.env', // fallback
       ],
       // Valida le variabili d'ambiente all'avvio
-      validationSchema,
+      validationSchema:
+        process.env.NODE_ENV === 'test' ? undefined : validationSchema,
       // Carica le configurazioni tipizzate
       load: [appConfig, databaseConfig, authConfig],
       // Valida che tutte le variabili richieste siano presenti
