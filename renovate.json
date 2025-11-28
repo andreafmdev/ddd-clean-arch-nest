@@ -55,13 +55,19 @@
     "separateMajorMinor": true,
     "separateMinorPatch": true,
     "separateMultipleMajor": true,
-
-    "packageManager": "pnpm",
-    "manager": "pnpm",
+    
+    "npmrc": "package-manager=pnpm",
     "postUpdateOptions": [
         "pnpmDedupe"
     ],
     "ignorePaths": [
         "package-lock.json"
-    ]
+    ],
+    
+    "npm": {
+        "enabled": false
+    },
+    "pnpm": {
+        "enabled": true
+    }
 }
