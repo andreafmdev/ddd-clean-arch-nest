@@ -1,11 +1,7 @@
 {
-  "name": "nestjs-ddd-devops",
+  "name": "ddd-clean-arch-nest",
+  "homepage": "https://github.com/andreafmdev/ddd-clean-arch-nest",
   "version": "0.0.1",
-  "description": "Template repository for NestJS projects following Domain-Driven Design, Clean Architecture and Functional Programming principles and best practice.",
-  "author": "Andrea Acampora",
-  "private": true,
-  "license": "MIT",
-  "homepage": "https://github.com/andrea-acampra/nestjs-ddd-devops",
   "scripts": {
     "prepare": "lefthook install",
     "build": "nest build",

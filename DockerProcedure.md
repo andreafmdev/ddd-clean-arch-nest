@@ -949,4 +949,4 @@ Per problemi o domande:
 **Ultimo aggiornamento**: 2025-01-27  
 **Versione Docker Compose**: 3.8  
 **Versione Docker**: 20.10+  
-**Progetto**: [NestJS-DDD-DevOps](https://github.com/andrea-acampora/nestjs-ddd-devops)
+**Progetto**: [DDD-Clean-Arch-Nest](https://github.com/andreafmdev/ddd-clean-arch-nest)

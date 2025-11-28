@@ -1,22 +1,22 @@
-# NestJS-DDD-DevOps
+# DDD-Clean-Arch-Nest
 
-[![Build](https://github.com/andrea-acampora/nestjs-ddd-devops/actions/workflows/build.yml/badge.svg)](https://github.com/andrea-acampora/nestjs-ddd-devops/actions/workflows/build.yml)
-[![Release](https://github.com/andrea-acampora/nestjs-ddd-devops/actions/workflows/release.yml/badge.svg)](https://github.com/andrea-acampora/nestjs-ddd-devops/actions/workflows/release.yml)
-[![Delivery](https://github.com/andrea-acampora/nestjs-ddd-devops/actions/workflows/delivery.yml/badge.svg)](https://github.com/andrea-acampora/nestjs-ddd-devops/actions/workflows/delivery.yml)
+[![Build](https://github.com/andreafmdev/ddd-clean-arch-nest/actions/workflows/build.yml/badge.svg)](https://github.com/andreafmdev/ddd-clean-arch-nest/actions/workflows/build.yml)
+[![Release](https://github.com/andreafmdev/ddd-clean-arch-nest/actions/workflows/release.yml/badge.svg)](https://github.com/andreafmdev/ddd-clean-arch-nest/actions/workflows/release.yml)
+[![Delivery](https://github.com/andreafmdev/ddd-clean-arch-nest/actions/workflows/delivery.yml/badge.svg)](https://github.com/andreafmdev/ddd-clean-arch-nest/actions/workflows/delivery.yml)
 
-[![pages-build-deployment](https://github.com/andrea-acampora/nestjs-ddd-devops/actions/workflows/pages/pages-build-deployment/badge.svg)](https://github.com/andrea-acampora/nestjs-ddd-devops/actions/workflows/pages/pages-build-deployment)
+[![pages-build-deployment](https://github.com/andreafmdev/ddd-clean-arch-nest/actions/workflows/pages/pages-build-deployment/badge.svg)](https://github.com/andreafmdev/ddd-clean-arch-nest/actions/workflows/pages/pages-build-deployment)
 ![Node Current](https://img.shields.io/node/v/%40nestjs%2Fcore?logo=github&color=blue)
 
-[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg?logo=github)](https://github.com/andrea-acampora/nestjs-ddd-devops/blob/main/LICENSE)
+[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg?logo=github)](https://github.com/andreafmdev/ddd-clean-arch-nest/blob/main/LICENSE)
 [![Semantic Release](https://img.shields.io/badge/semantic--release-angular-e10079?logo=semantic-release&color=violet)](https://github.com/semantic-release/semantic-release/tree/master)
 [![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-%23FE5196?logo=conventionalcommits&logoColor=white)](https://conventionalcommits.org)
 
-[![GitHub Pull Requests](https://img.shields.io/github/issues-pr-raw/andrea-acampora/nestjs-ddd-devops?color=cyan&logo=github)]()
-[![GitHub Issues](https://img.shields.io/github/issues-raw/andrea-acampora/nestjs-ddd-devops?style=flat&logo=github)](https://github.com/andrea-acampora/nestjs-ddd-devops/issues)
-[![GitHub Repo stars](https://img.shields.io/github/stars/andrea-acampora/nestjs-ddd-devops?style=flat&color=yellow&logo=github)](https://github.com/andrea-acampora/nestjs-ddd-devops/stargazers)
-[![GitHub contributors](https://img.shields.io/github/contributors/andrea-acampora/nestjs-ddd-devops?color=orange&logo=github)](https://github.com/andrea-acampora/nestjs-ddd-devops/graphs/contributors)
+[![GitHub Pull Requests](https://img.shields.io/github/issues-pr-raw/andreafmdev/ddd-clean-arch-nest?color=cyan&logo=github)]()
+[![GitHub Issues](https://img.shields.io/github/issues-raw/andreafmdev/ddd-clean-arch-nest?style=flat&logo=github)](https://github.com/andreafmdev/ddd-clean-arch-nest/issues)
+[![GitHub Repo stars](https://img.shields.io/github/stars/andreafmdev/ddd-clean-arch-nest?style=flat&color=yellow&logo=github)](https://github.com/andreafmdev/ddd-clean-arch-nest/stargazers)
+[![GitHub contributors](https://img.shields.io/github/contributors/andreafmdev/ddd-clean-arch-nest?color=orange&logo=github)](https://github.com/andreafmdev/ddd-clean-arch-nest/graphs/contributors)
 
-The purpose of this [repository](https://github.com/andrea-acampora/nestjs-ddd-devops) is to create a ready-to-use project following _Domain-Driven Design_, _Clean Architecture_ and _Functional Programming_ best practices combined with some _DevOps_ techniques such as _Continuous Integration_, _Continuous Delivery_ and _Quality Assurance_.
+The purpose of this [repository](https://github.com/andreafmdev/ddd-clean-arch-nest) is to create a ready-to-use project following _Domain-Driven Design_, _Clean Architecture_ and _Functional Programming_ best practices combined with some _DevOps_ techniques such as _Continuous Integration_, _Continuous Delivery_ and _Quality Assurance_.
 
 **Key Features**: 
 - **Modular Monolith Architecture** with clear domain boundaries
@@ -31,9 +31,9 @@ The purpose of this [repository](https://github.com/andrea-acampora/nestjs-ddd-d
 - **pnpm** as package manager for efficient dependency management
 
 The project is completely open source under the **MIT** license, feel free to contribute by opening
-an [issue](https://github.com/andrea-acampora/nestjs-ddd-devops/issues/new/choose),
-a [pull request](https://github.com/andrea-acampora/nestjs-ddd-devops/compare) or
-a [discussion topic](https://github.com/andrea-acampora/nestjs-ddd-devops/discussions/new/choose).
+an [issue](https://github.com/andreafmdev/ddd-clean-arch-nest/issues/new/choose),
+a [pull request](https://github.com/andreafmdev/ddd-clean-arch-nest/compare) or
+a [discussion topic](https://github.com/andreafmdev/ddd-clean-arch-nest/discussions/new/choose).
 
 In the following chapters you will find a description of the main choices, technologies and techniques adopted.
 
@@ -60,8 +60,8 @@ In the following chapters you will find a description of the main choices, techn
 
 2. **Clone your fork:**
    ```bash
-   git clone https://github.com/your-username/nestjs-ddd-devops.git
-   cd nestjs-ddd-devops
+   git clone https://github.com/your-username/ddd-clean-arch-nest.git
+   cd ddd-clean-arch-nest
    ```
 
 3. **Install dependencies:**
@@ -120,7 +120,7 @@ docker-compose --profile prod up -d
 
 ## Table of Contents
 
-- [NestJS-DDD-DevOps](#nestjs-ddd-devops)
+- [DDD-Clean-Arch-Nest](#ddd-clean-arch-nest)
   - [Stack](#stack)
   - [Quick Start](#quick-start)
     - [Prerequisites](#prerequisites)
@@ -128,16 +128,18 @@ docker-compose --profile prod up -d
     - [Docker Quick Start](#docker-quick-start)
   - [Table of Contents](#table-of-contents)
   - [Architecture](#architecture)
+    - [HTTP Adapter: Fastify](#http-adapter-fastify)
   - [Authentication](#authentication)
     - [Multi-Provider Support](#multi-provider-support)
     - [Keycloak Configuration](#keycloak-configuration)
     - [Supabase Configuration](#supabase-configuration)
     - [Using Authentication](#using-authentication)
   - [Docker Configuration](#docker-configuration)
+    - [Quick Overview](#quick-overview)
   - [Domain-Driven Design](#domain-driven-design)
     - [Strategic Design](#strategic-design)
     - [Tactical Design](#tactical-design)
-  - [Clean Architecture](#clean-architecture)
+    - [Clean Architecture](#clean-architecture)
   - [Testing](#testing)
   - [GraphQL](#graphql)
   - [Functional Programming](#functional-programming)
@@ -152,6 +154,12 @@ docker-compose --profile prod up -d
     - [Rate Limiting](#rate-limiting)
     - [API Versioning](#api-versioning)
   - [Environment Variables](#environment-variables)
+    - [Database Configuration](#database-configuration)
+    - [Authentication Provider](#authentication-provider)
+    - [Keycloak Configuration (if AUTH\_PROVIDER=keycloak)](#keycloak-configuration-if-auth_providerkeycloak)
+    - [Supabase Configuration (if AUTH\_PROVIDER=supabase)](#supabase-configuration-if-auth_providersupabase)
+    - [Application Configuration](#application-configuration)
+    - [Environment-Specific Configuration](#environment-specific-configuration)
   - [Contributors](#contributors)
 
 ## Architecture
