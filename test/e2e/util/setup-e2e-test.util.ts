@@ -29,7 +29,14 @@ export async function initializeApp(): Promise<{
       forbidNonWhitelisted: true,
     }),
   );
+  
+  // ═══════════════════════════════════════════════════
+  // IMPORTANTE: Con Fastify, devi chiamare listen() prima di usare getHttpServer()
+  // Usa porta 0 per assegnare una porta casuale disponibile
+  // ═══════════════════════════════════════════════════
   await app.init();
+  await app.listen(0); // Porta 0 = porta casuale disponibile
+  
   const orm = app.get<MikroORM>(MikroORM);
   return { app, orm };
 }
