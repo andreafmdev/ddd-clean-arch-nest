@@ -4,9 +4,9 @@ import { Repository } from './repository.interface';
 import { Collection } from '../api/rest/collection.interface';
 import { BaseEntity } from './base-entity.interface';
 
-export abstract class MikroOrmRepository<T extends BaseEntity>
-  implements Repository<T>
-{
+export abstract class MikroOrmRepository<
+  T extends BaseEntity,
+> implements Repository<T> {
   constructor(
     protected readonly repository: EntityRepository<T>,
     protected readonly em: EntityManager,

@@ -30,7 +30,7 @@
     "paths": {
       "@modules/*": ["src/modules/*"],
       "@/*": ["src/*"],
-      "@auth/*": ["src/modules/auth/*"],
+      "@auth/*": ["src/modules/auth/*"]
     }
   }
 }

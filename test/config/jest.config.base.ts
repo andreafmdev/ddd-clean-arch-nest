@@ -8,6 +8,12 @@ const baseConfig: Config = {
     '^.+\\.(t|j)s$': 'ts-jest',
   },
   setupFiles: ['./config/jest.setup.ts'],
+  // ═══════════════════════════════════════════════════
+  // Trasforma anche i moduli ESM come uuid@12
+  // ═══════════════════════════════════════════════════
+  transformIgnorePatterns: [
+    'node_modules/(?!(uuid)/)',
+  ],
 };
 
 export default baseConfig;
