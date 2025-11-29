@@ -7,7 +7,7 @@
 # Stage 1: Builder
 # Utilizzato per compilare l'applicazione con tutte le dipendenze
 # ═══════════════════════════════════════════════════
-FROM node:22-alpine AS builder
+FROM node:24-alpine AS builder
 
 # Imposta la directory di lavoro
 # Best practice: usa path assoluti espliciti
@@ -39,7 +39,7 @@ RUN pnpm run build
 # Stage 2: Production
 # Immagine finale ottimizzata con solo runtime necessario
 # ═══════════════════════════════════════════════════
-FROM node:22-alpine AS production
+FROM node:24-alpine AS production
 
 # Imposta la directory di lavoro
 WORKDIR /app
