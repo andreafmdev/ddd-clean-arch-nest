@@ -13,7 +13,7 @@ services:
     container_name: postgresql-dev
     # Best practice: usa tag specifici invece di 'latest' per riproducibilità
     # postgres:16-alpine è più leggero e sicuro di postgres:latest
-    image: postgres:16-alpine
+    image: postgres:17-alpine
     # Best practice: unless-stopped mantiene il container attivo dopo riavvio Docker
     restart: unless-stopped
     # Profili: definiscono quando il servizio viene avviato
@@ -54,7 +54,7 @@ services:
   # ═══════════════════════════════════════════════════
   postgresql-test:
     container_name: postgresql-test
-    image: postgres:16-alpine
+    image: postgres:17-alpine
     restart: unless-stopped
     profiles:
       - test
@@ -83,7 +83,7 @@ services:
   # ═══════════════════════════════════════════════════
   postgresql-qual:
     container_name: postgresql-qual
-    image: postgres:16-alpine
+    image: postgres:17-alpine
     restart: unless-stopped
     profiles:
       - qual
