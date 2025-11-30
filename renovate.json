@@ -54,13 +54,7 @@
     "prHourlyLimit": 0,
     "separateMajorMinor": true,
     "separateMinorPatch": true,
-    "separateMultipleMajor": true,
-    
-    "postUpdateOptions": [
-        "pnpmDedupe"
-    ],
-    "ignorePaths": [
-        "package-lock.json"
-    ]
+    "separateMultipleMajor": true
+   
   
 }
