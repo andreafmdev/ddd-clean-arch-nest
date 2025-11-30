@@ -28,7 +28,7 @@
             "enabled": false
         }
     ],
-    "baseBranches": [
+    "baseBranchPatterns": [
         "develop"
     ],
     "dependencyDashboard": true,
@@ -43,7 +43,7 @@
     "reviewers": [
         "andreafmdev"
     ],
-    "includeForks": true,
+    "forkProcessing": "enabled",
     "labels": [
         "dependencies"
     ],
@@ -55,6 +55,4 @@
     "separateMajorMinor": true,
     "separateMinorPatch": true,
     "separateMultipleMajor": true
-   
-  
 }
