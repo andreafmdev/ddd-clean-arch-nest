@@ -3,7 +3,6 @@
 # Best practice: usa file di override per personalizzazioni ambiente-specifiche
 # Questo file viene applicato automaticamente se presente (convenzione Docker)
 # ═══════════════════════════════════════════════════
-version: '3.8'
 
 services:
   app-dev:

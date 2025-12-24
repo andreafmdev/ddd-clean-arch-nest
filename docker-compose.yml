@@ -2,7 +2,6 @@
 # Docker Compose Configuration
 # Best practice: usa version 3.8+ per supporto completo a profili e healthcheck
 # ═══════════════════════════════════════════════════
-version: '3.8'
 
 services:
   # ═══════════════════════════════════════════════════
