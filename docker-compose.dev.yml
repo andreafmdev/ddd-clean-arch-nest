@@ -6,25 +6,29 @@
 
 services:
   app-dev:
-   
     # Override del comando per sviluppo con hot-reload
     # Best practice: usa start:dev per watch mode in sviluppo
     command: pnpm run start:dev
-    
+
     # Override variabili ambiente per sviluppo
     environment:
       NODE_ENV: development
       # Best practice: abilita debug e logging verboso in dev
       DEBUG: ${DEBUG:-false}
       LOG_LEVEL: ${LOG_LEVEL:-debug}
-    
+
     # Volumi aggiuntivi per sviluppo
     # Best practice: mount completo del codice per hot-reload
     volumes:
       - ./src:/app/src
-      - ./node_modules:/app/node_modules
+      # IMPORTANTE: usa named volume invece di bind mount
+      # Questo mantiene i node_modules installati nel container
+      - node_modules_dev:/app/node_modules
       - ./package.json:/app/package.json
       - ./tsconfig.json:/app/tsconfig.json
-    
+
     # Best practice: rimuovi restart in dev per debugging più facile
     restart: "no"
+volumes:
+  #Con il named volume, il container usa i node_modules installati durante la build del Dockerfile (stage builder)
+  node_modules_dev:
