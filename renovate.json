@@ -28,7 +28,7 @@
             "enabled": false
         }
     ],
-    "baseBranches": [
+    "baseBranchPatterns": [
         "develop"
     ],
     "dependencyDashboard": true,
