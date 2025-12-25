@@ -11,17 +11,18 @@
 [![Semantic Release](https://img.shields.io/badge/semantic--release-angular-e10079?logo=semantic-release&color=violet)](https://github.com/semantic-release/semantic-release/tree/master)
 [![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-%23FE5196?logo=conventionalcommits&logoColor=white)](https://conventionalcommits.org)
 
-[![GitHub Pull Requests](https://img.shields.io/github/issues-pr-raw/andreafmdev/ddd-clean-arch-nest?color=cyan&logo=github)]()
+[![GitHub Pull Requests](https://img.shields.io/github/issues-pr-raw/andreafmdev/ddd-clean-arch-nest?color=cyan&logo=github)](https://github.com/andreafmdev/ddd-clean-arch-nest/pulls)
 [![GitHub Issues](https://img.shields.io/github/issues-raw/andreafmdev/ddd-clean-arch-nest?style=flat&logo=github)](https://github.com/andreafmdev/ddd-clean-arch-nest/issues)
 [![GitHub Repo stars](https://img.shields.io/github/stars/andreafmdev/ddd-clean-arch-nest?style=flat&color=yellow&logo=github)](https://github.com/andreafmdev/ddd-clean-arch-nest/stargazers)
 [![GitHub contributors](https://img.shields.io/github/contributors/andreafmdev/ddd-clean-arch-nest?color=orange&logo=github)](https://github.com/andreafmdev/ddd-clean-arch-nest/graphs/contributors)
 
 The purpose of this [repository](https://github.com/andreafmdev/ddd-clean-arch-nest) is to create a ready-to-use project following _Domain-Driven Design_, _Clean Architecture_ and _Functional Programming_ best practices combined with some _DevOps_ techniques such as _Continuous Integration_, _Continuous Delivery_ and _Quality Assurance_.
 
-**Key Features**: 
+**Key Features**:
 - **Modular Monolith Architecture** with clear domain boundaries
 - **Multi-Provider Authentication** (Keycloak & Supabase) with dynamic selection
 - **Fastify HTTP Adapter** for high-performance request handling
+- **Structured Logging** with Pino (JSON format) and Request ID tracking
 - **GraphQL Support** with Apollo Server and Fastify integration
 - **Docker Multi-Stage Build** with environment profiles (dev, test, qual, prod)
 - **Test-Driven Development** with _Jest_ and _Supertest_
@@ -73,7 +74,7 @@ In the following chapters you will find a description of the main choices, techn
    ```bash
    docker-compose --profile dev up -d postgresql-dev
    ```
-   
+
    For detailed Docker setup, see [Docker Configuration Guide](./DockerProcedure.md).
 
 5. **Create environment files:**
@@ -81,7 +82,7 @@ In the following chapters you will find a description of the main choices, techn
    cp .env.example .env
    cp .env.example .env.test
    ```
-   
+
    Configure the `.env` file with your settings (see [Environment Variables](#environment-variables)).
 
 6. **Create database schema:**
@@ -129,6 +130,9 @@ docker-compose --profile prod up -d
   - [Table of Contents](#table-of-contents)
   - [Architecture](#architecture)
     - [HTTP Adapter: Fastify](#http-adapter-fastify)
+  - [Logging \& Observability](#logging--observability)
+    - [Structured Logging](#structured-logging)
+    - [Request ID Tracking](#request-id-tracking)
   - [Authentication](#authentication)
     - [Multi-Provider Support](#multi-provider-support)
     - [Keycloak Configuration](#keycloak-configuration)
@@ -204,6 +208,71 @@ const app = await NestFactory.create<NestFastifyApplication>(
 ```
 
 For GraphQL, the project uses `@as-integrations/fastify` to integrate Apollo Server with Fastify.
+
+---
+
+## Logging & Observability
+
+The project uses **Pino** (integrated with Fastify) for structured logging with JSON format, suitable for log aggregation systems.
+
+### Structured Logging
+
+All logs are output in JSON format, making them easy to parse and aggregate with tools like ELK, Datadog, or Grafana.
+
+**Log Levels:**
+
+- `debug`: Development environment (default)
+- `info`: Production environment (default)
+- Configurable via `LOG_LEVEL` environment variable
+
+**Example log output:**
+```json
+{
+  "level": 30,
+  "time": 1703510400000,
+  "pid": 12345,
+  "hostname": "server-01",
+  "reqId": "req-abc123",
+  "req": {
+    "method": "GET",
+    "url": "/api/v1/users",
+    "host": "localhost:3000"
+  },
+  "res": {
+    "statusCode": 200
+  },
+  "responseTime": 45.2,
+  "msg": "request completed"
+}
+```
+
+### Request ID Tracking
+
+Every HTTP request is automatically assigned a unique Request ID:
+
+- Generated as UUID v4 if not provided via `X-Request-ID` header
+- Included in response headers as `X-Request-ID`
+- Available in all log entries via `reqId` field
+- Accessible in controllers via `request.id` (Fastify)
+
+**Usage in controllers:**
+```typescript
+@Get('test-logging')
+testLogging(@Req() req: FastifyRequest) {
+  // Request ID is automatically available
+  req.log.info({ test: true }, 'Test log message');
+  
+  return {
+    requestId: req.id, // Access the Request ID
+    message: 'Check logs for output'
+  };
+}
+```
+
+**Environment Variables:**
+```env
+LOG_LEVEL=debug  # debug, info, warn, error
+```
 
 ---
 
@@ -1070,5 +1139,4 @@ NODE_ENV=development
 | Production | Variable | Variable | production |
 
 **Note:** For production, use a secrets manager (AWS Secrets Manager, HashiCorp Vault, etc.) instead of `.env` files.
-
 
