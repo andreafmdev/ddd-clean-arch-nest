@@ -5,6 +5,7 @@ import {
   NestFastifyApplication,
 } from '@nestjs/platform-fastify';
 import { join } from 'path';
+import { existsSync } from 'fs';
 import {
   BadRequestException,
   ValidationPipe,
@@ -13,25 +14,65 @@ import {
 import { HttpExceptionFilter } from './libs/exceptions/exception.filter';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { ConfigService } from '@nestjs/config';
+import { FastifyReply, FastifyRequest } from 'fastify';
+import { v4 } from 'uuid';
 
 async function bootstrap() {
   const app = await NestFactory.create<NestFastifyApplication>(
     AppModule,
-    new FastifyAdapter(),
+    new FastifyAdapter({
+      logger: {
+        level:
+          process.env.LOG_LEVEL ||
+          (process.env.NODE_ENV === 'production' ? 'info' : 'debug'),
+      },
+    }),
   );
 
   // Ottieni ConfigService
   const configService = app.get(ConfigService);
 
+  const nodeEnv = configService.get<string>('app.nodeEnv') || 'development';
+  const isDevelopmentOrTest = nodeEnv === 'development' || nodeEnv === 'test';
+
+  // ═══════════════════════════════════════════════════
+  // Request ID Middleware (usando hook Fastify)
+  // ═══════════════════════════════════════════════════
+  const fastifyInstance = app.getHttpAdapter().getInstance();
+
+  fastifyInstance.addHook('onRequest', async (request: FastifyRequest) => {
+    const requestId = (request.headers['x-request-id'] as string) || v4();
+    request.id = requestId;
+    // L'header verrà aggiunto nella risposta tramite onSend
+  });
+
+  fastifyInstance.addHook(
+    'onSend',
+    async (request: FastifyRequest, reply: FastifyReply) => {
+      if (request.id) {
+        reply.header('X-Request-ID', request.id);
+      }
+    },
+  );
+
+  // ═══════════════════════════════════════════════════
+  // Configurazione applicazione
+  // ═══════════════════════════════════════════════════
   app.enableVersioning({
     type: VersioningType.URI,
     defaultVersion: '1',
   });
   app.enableShutdownHooks();
   app.enableCors();
-  app.useStaticAssets({
-    root: join(__dirname, '../public'),
-  });
+
+  // Static Assets (solo se la cartella esiste)
+  const publicPath = join(__dirname, '../public');
+  if (existsSync(publicPath)) {
+    app.useStaticAssets({
+      root: publicPath,
+    });
+  }
+
   app.setGlobalPrefix('api');
   app.useGlobalPipes(
     new ValidationPipe({
@@ -52,9 +93,6 @@ async function bootstrap() {
   // ═══════════════════════════════════════════════════
   // Swagger Configuration (solo in development e test)
   // ═══════════════════════════════════════════════════
-  const nodeEnv = configService.get<string>('app.nodeEnv') || 'development';
-  const isDevelopmentOrTest = nodeEnv === 'development' || nodeEnv === 'test';
-
   if (isDevelopmentOrTest) {
     const config = new DocumentBuilder()
       .setTitle('NestJS DDD DevOps API')
@@ -75,7 +113,7 @@ async function bootstrap() {
           description: 'Enter JWT token from Keycloak or Supabase',
           in: 'header',
         },
-        'JWT-auth', // Questo nome viene usato con @ApiBearerAuth('JWT-auth')
+        'JWT-auth',
       )
       .addTag('Health', 'Health check endpoints')
       .addTag('Users', 'User management endpoints')
@@ -87,9 +125,9 @@ async function bootstrap() {
       customfavIcon: 'https://nestjs.com/img/logo-small.svg',
       customCss: '.swagger-ui .topbar { display: none }',
       swaggerOptions: {
-        persistAuthorization: true, // Mantiene il token tra i refresh
-        tagsSorter: 'alpha', // Ordina i tag alfabeticamente
-        operationsSorter: 'alpha', // Ordina gli endpoint alfabeticamente
+        persistAuthorization: true,
+        tagsSorter: 'alpha',
+        operationsSorter: 'alpha',
       },
     });
   }

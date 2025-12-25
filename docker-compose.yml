@@ -2,7 +2,6 @@
 # Docker Compose Configuration
 # Best practice: usa version 3.8+ per supporto completo a profili e healthcheck
 # ═══════════════════════════════════════════════════
-version: '3.8'
 
 services:
   # ═══════════════════════════════════════════════════
@@ -62,6 +61,7 @@ services:
     ports:
       - "25432:5432"
     environment:
+      
       POSTGRES_DB: ${DATABASE_NAME:-db-test-e2e}
       POSTGRES_USER: ${DATABASE_USER:-postgres}
       POSTGRES_PASSWORD: ${DATABASE_PASSWORD:-postgres}
