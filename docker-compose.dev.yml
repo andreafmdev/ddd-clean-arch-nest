@@ -16,7 +16,7 @@ services:
       # Best practice: abilita debug e logging verboso in dev
       DEBUG: ${DEBUG:-false}
       LOG_LEVEL: ${LOG_LEVEL:-debug}
-
+  
     # Volumi aggiuntivi per sviluppo
     # Best practice: mount completo del codice per hot-reload
     volumes:

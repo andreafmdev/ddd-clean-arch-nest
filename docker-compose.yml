@@ -61,6 +61,7 @@ services:
     ports:
       - "25432:5432"
     environment:
+      
       POSTGRES_DB: ${DATABASE_NAME:-db-test-e2e}
       POSTGRES_USER: ${DATABASE_USER:-postgres}
       POSTGRES_PASSWORD: ${DATABASE_PASSWORD:-postgres}
