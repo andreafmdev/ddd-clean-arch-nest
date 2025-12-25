@@ -160,7 +160,6 @@ docker-compose --profile prod up -d
     - [Supabase Configuration (if AUTH\_PROVIDER=supabase)](#supabase-configuration-if-auth_providersupabase)
     - [Application Configuration](#application-configuration)
     - [Environment-Specific Configuration](#environment-specific-configuration)
-  - [Contributors](#contributors)
 
 ## Architecture
 
@@ -1072,10 +1071,4 @@ NODE_ENV=development
 
 **Note:** For production, use a secrets manager (AWS Secrets Manager, HashiCorp Vault, etc.) instead of `.env` files.
 
----
 
-## Contributors
-
-<a href="https://github.com/andrea-acampora/nestjs-ddd-devops/contributors">
-  <img src="https://contributors-img.web.app/image?repo=andrea-acampora/nestjs-ddd-devops" alt="Contributors" />
-</a>
